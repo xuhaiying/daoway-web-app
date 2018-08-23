@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TabBar, ListView } from 'antd-mobile';
+import { TabBar, ListView } from 'antd-mobile'; 
+import Home from '../Home';
 
 const data = [
   {
@@ -161,7 +162,7 @@ class TabBarExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'blueTab',
+      selectedTab: 'home',
       hidden: false,
     };
   }
@@ -189,7 +190,7 @@ class TabBarExample extends React.Component {
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
           unselectedTintColor="#949494"
-          tintColor="#33A3F4"
+          tintColor="#e94840"
           barTintColor="white"
           tabBarPosition="bottom"
           hidden={this.state.hidden}
@@ -198,93 +199,41 @@ class TabBarExample extends React.Component {
           <TabBar.Item
             title="首页"
             key="homepage"
-            icon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-            />
-            }
-            selectedIcon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-            />
-            }
-            selected={this.state.selectedTab === 'blueTab'}
-            badge={1}
+            icon={{ uri: 'http://daoway.cn/h5/image/icon2.png' }}
+            selectedIcon={{ uri: 'http://daoway.cn/h5/image/icon1.png' }}
+            selected={this.state.selectedTab === 'home'}
             onPress={() => {
               this.setState({
-                selectedTab: 'blueTab',
+                selectedTab: 'home',
               });
             }}
             data-seed="logId"
           >
+           <Home/>
+          </TabBar.Item>
+          <TabBar.Item
+            icon={{ uri: 'http://daoway.cn/h5/image/icon6.png' }}
+            selectedIcon={{ uri: 'http://daoway.cn/h5/image/icon5.png' }}
+            title="订单"
+            key="order"
+            selected={this.state.selectedTab === 'order'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'order',
+              });
+            }}
+          >
             <ListViewExample />
           </TabBar.Item>
           <TabBar.Item
-            icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
-              />
-            }
-            selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
-              />
-            }
-            title="分类"
-            key="classify"
-            badge={'new'}
-            selected={this.state.selectedTab === 'redTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'redTab',
-              });
-            }}
-            data-seed="logId1"
-          >
-            {this.renderContent('Koubei')}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat' }}
-              />
-            }
-            selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat' }}
-              />
-            }
-            title="订单"
-            key="order"
-            dot
-            selected={this.state.selectedTab === 'greenTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'greenTab',
-              });
-            }}
-          >
-            {this.renderContent('Friend')}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-            selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
+            icon={{ uri: 'http://daoway.cn/h5/image/icon8.png' }}
+            selectedIcon={{ uri: 'http://daoway.cn/h5/image/icon7.png' }}
             title="我的"
             key="my"
-            selected={this.state.selectedTab === 'yellowTab'}
+            selected={this.state.selectedTab === 'my'}
             onPress={() => {
               this.setState({
-                selectedTab: 'yellowTab',
+                selectedTab: 'my',
               });
             }}
           >
