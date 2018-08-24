@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { TabBar, ListView } from 'antd-mobile'; 
 import Home from '../Home';
+import {observer,inject} from 'mobx-react';
 
 const data = [
   {
@@ -81,7 +82,6 @@ class ListViewExample extends React.Component {
     if (this.state.isLoading && !this.state.hasMore) {
       return;
     }
-    console.log('reach end', event);
     this.setState({ isLoading: true });
     setTimeout(() => {
       genData(++pageIndex);
@@ -157,7 +157,8 @@ class ListViewExample extends React.Component {
     );
   }
 }
-
+@inject("store")
+@observer
 class TabBarExample extends React.Component {
   constructor(props) {
     super(props);
@@ -165,29 +166,41 @@ class TabBarExample extends React.Component {
       selectedTab: 'home',
       hidden: false,
     };
+    this.handleClick = this.handleScroll.bind(this);
   }
-
-  renderContent(pageText) {
-    return (
-      <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-        <div style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</div>
-        <a style={{ display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9' }}
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({
-              hidden: !this.state.hidden,
-            });
-          }}
-        >
-          Click to show/hide tab-bar
-        </a>
-      </div>
-    );
+  handleScroll(e) {
+    e.preventDefault();
+    if (this.state.selectedTab === 'home'){
+      const t = 200;
+      let scrollTop = e.target.scrollTop;
+      let m = Math.min(scrollTop, t) / t;
+      this.props.store.changeBgColor(m);
+    } 
   }
-
+  // renderContent(pageText) {
+  //   console.log(pageText)
+  //   return (
+  //     <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
+  //       <div style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</div>
+  //       <a style={{ display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9' }}
+  //         onClick={(e) => {
+  //           e.preventDefault();
+  //           this.setState({
+  //             hidden: !this.state.hidden,
+  //           });
+  //         }}
+  //       >
+  //         Click to show/hide tab-bar
+  //       </a>
+  //     </div>
+  //   );
+  // }
+  // handleScroll(event){
+  //   console.log(event)
+  // }
   render() {
     return (
-      <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
+      <div onScroll={(event)=>{this.handleScroll(event)}} style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#e94840"
@@ -209,6 +222,7 @@ class TabBarExample extends React.Component {
             }}
             data-seed="logId"
           >
+          
            <Home/>
           </TabBar.Item>
           <TabBar.Item
@@ -237,7 +251,7 @@ class TabBarExample extends React.Component {
               });
             }}
           >
-            {this.renderContent('My')}
+           
           </TabBar.Item>
         </TabBar>
       </div>

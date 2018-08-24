@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card,WhiteSpace } from 'antd-mobile';
+import { Card } from 'antd-mobile';
 
 
 class Recommend extends React.Component {
@@ -8,7 +8,6 @@ class Recommend extends React.Component {
   }
   render() {
     return (<div>
-        <WhiteSpace size="lg" />
         <Card full>
           <Card.Header
             title="This is title"
